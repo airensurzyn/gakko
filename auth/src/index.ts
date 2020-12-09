@@ -6,6 +6,7 @@ import cookieSession from 'cookie-session';
 
 import { currentUserRouter } from './routes/current';
 import { signupRouter } from './routes/signup';
+import { signinRouter } from './routes/signin';
 import { errorHandler, NotFoundError } from '@llp-common/backend-common';
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(cookieSession({
 
 app.use(currentUserRouter);
 app.use(signupRouter);
+app.use(signinRouter);
 
 app.all('*', async (req, res, next) => {
     next(new NotFoundError());

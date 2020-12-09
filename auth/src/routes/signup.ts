@@ -1,6 +1,6 @@
 import express, {Request, Response} from 'express';
 import { body } from 'express-validator';
-import { validateRequest, BadRequestError, NotFoundError } from '@llp-common/backend-common';
+import { validateRequest, BadRequestError } from '@llp-common/backend-common';
 import { User } from '../models/user';
 import jwt from 'jsonwebtoken';
 
