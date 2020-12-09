@@ -1,10 +1,11 @@
 import express from 'express';
+import 'express-async-errors';
 import { json } from 'body-parser';
 import mongoose from 'mongoose';
 
 import { currentUserRouter } from './routes/current';
 import { signupRouter } from './routes/signup';
-import { errorHandler } from '@llp-common/backend-common';
+import { errorHandler, NotFoundError } from '@llp-common/backend-common';
 
 const app = express();
 
@@ -15,9 +16,9 @@ app.use(json());
 app.use(currentUserRouter);
 app.use(signupRouter);
 
-app.all('*', async (req, res) => {
-    res.send('Good');
-});
+app.all('*', async (req, res, next) => {
+    next(new NotFoundError());
+})
 
 app.use(errorHandler);
 

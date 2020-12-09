@@ -1,6 +1,7 @@
 import express, {Request, Response} from 'express';
 import { body } from 'express-validator';
-import { validateRequest } from '@llp-common/backend-common';
+import { validateRequest, BadRequestError, NotFoundError } from '@llp-common/backend-common';
+import { User } from '../models/user';
 
 const router = express.Router();
 
@@ -9,10 +10,22 @@ router.post('/api/users/signup', [
     body('password').trim().isLength({min:4, max: 20}).
         withMessage('Password must be between 4 and 20 characters')],
     validateRequest,
-    (req: Request, res: Response) => {
+    async (req: Request, res: Response) => {
 
     const { email, password } = req.body;
-    res.status(200).send('Signup route is up');
+
+    const existingUser = await User.findOne({ email });
+    if(existingUser) {
+        throw new BadRequestError('Email in use');
+     }
+    
+    const user = User.build({
+        email,
+        password
+    });
+    await user.save();
+
+    res.status(200).send(user);
 });
 
 export { router as signupRouter };

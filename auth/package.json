@@ -11,11 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "@airentickets/common": "^1.0.13",
-    "@llp-common/backend-common": "^1.0.11",
+    "@llp-common/backend-common": "^1.0.13",
     "@types/express": "^4.17.9",
     "@types/mongoose": "^5.10.2",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "express-validator": "^6.8.0",
     "mongoose": "^5.11.5",
     "ts-node-dev": "^1.0.0",
