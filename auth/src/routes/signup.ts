@@ -2,6 +2,7 @@ import express, {Request, Response} from 'express';
 import { body } from 'express-validator';
 import { validateRequest, BadRequestError, NotFoundError } from '@llp-common/backend-common';
 import { User } from '../models/user';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -24,6 +25,15 @@ router.post('/api/users/signup', [
         password
     });
     await user.save();
+
+    const userJwt = jwt.sign({
+        id: user.id,
+        email: user.email
+    }, process.env.JWT_KEY!);
+
+    req.session = {
+        jwt: userJwt
+    }
 
     res.status(200).send(user);
 });
