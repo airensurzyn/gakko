@@ -1,9 +1,10 @@
 import express from 'express';
+import { currentUser } from '@llp-common/backend-common';
 
 const router = express.Router();
 
-router.get('/api/users/current', (req, res) => {
-    res.status(200).send('Current route is up')
-});
+router.get('/api/users/current', currentUser, (req,res) => {
+    res.send({ currentUser: req.currentUser || null });
+})
 
-export { router as currentUserRouter };
+export {router as currentUserRouter};
