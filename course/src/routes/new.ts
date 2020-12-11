@@ -3,6 +3,8 @@ import { body } from 'express-validator';
 import { BadRequestError, requireAuth, validateRequest } from '@llp-common/backend-common';
 import { Course } from '../models/course';
 import { Languages, CourseStatus } from '@llp-common/backend-common';
+import { CourseCreatedPublisher } from '../events/publishers/course-created-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -32,6 +34,15 @@ router.post('/api/courses', requireAuth, [body('title').not().isEmpty().withMess
 
 
         await course.save();
+        new CourseCreatedPublisher(natsWrapper?.client).publish({
+            id: course._id,
+            title: course.title,
+            description: course.description,
+            languageTopic: course.languageTopic,
+            instructionLanguage: course.instructionLanguage,
+            status: course.status,
+            instructor: course.instructor
+        })
 
         res.status(201).send(course);
 
