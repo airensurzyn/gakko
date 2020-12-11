@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Languages } from '@llp-common/backend-common';
+import { Languages, CourseStatus } from '@llp-common/backend-common';
 
 
 interface CourseDoc extends mongoose.Document {
@@ -8,6 +8,7 @@ interface CourseDoc extends mongoose.Document {
     description: string;
     languageTopic: string;
     instructionLanguage: string;
+    status: string;
 }
 
 interface CourseModel extends mongoose.Model<CourseDoc> {
@@ -20,6 +21,7 @@ interface CourseAttributes {
     description: string;
     languageTopic: string;
     instructionLanguage: string;
+    status: string;
 }
 
 const courseSchema = new mongoose.Schema({
@@ -44,6 +46,12 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: Object.values(Languages),
+    },
+    status: {
+        type: String,
+        required: true,
+        enum: Object.values(CourseStatus),
+        default: CourseStatus.Closed
     }
 }, {
     toJSON:{
