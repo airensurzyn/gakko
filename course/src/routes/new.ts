@@ -14,7 +14,7 @@ router.post('/api/courses', requireAuth, [body('title').not().isEmpty().withMess
     body('instructionLanguage').not().isEmpty().withMessage('Instruction Language is required')],
     validateRequest, async (req: Request, res: Response) => {
         
-        const { title, description, languageTopic, instructionLanguage } = req.body;
+        const { title, description, languageTopic, instructionLanguage, headerImage, price } = req.body;
 
         if(!Object.values(Languages).includes(languageTopic)) {
             throw new BadRequestError('Language Topic is not of proper type Language enum');
@@ -27,9 +27,11 @@ router.post('/api/courses', requireAuth, [body('title').not().isEmpty().withMess
             title,
             description, 
             languageTopic,
+            price,
             instructionLanguage,
             status: CourseStatus.Closed,
-            instructor: req.currentUser!.id
+            instructor: req.currentUser!.id,
+            headerImage: headerImage
         });
 
 
@@ -41,7 +43,9 @@ router.post('/api/courses', requireAuth, [body('title').not().isEmpty().withMess
             languageTopic: course.languageTopic,
             instructionLanguage: course.instructionLanguage,
             status: course.status,
-            instructor: course.instructor
+            instructor: course.instructor,
+            headerImage: course.headerImage,
+            price: course.price
         })
 
         res.status(201).send(course);

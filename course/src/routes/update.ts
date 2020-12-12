@@ -12,7 +12,7 @@ router.put('/api/courses/:courseId', requireAuth, [body('title').not().isEmpty()
     validateRequest,async (req: Request, res: Response) => {
     const course = await Course.findById(req.params.courseId);
 
-    const { title, description, languageTopic, instructionLanguage, status} = req.body; 
+    const { title, description, languageTopic, instructionLanguage, status, headerImage} = req.body; 
 
     if(!Object.values(CourseStatus).includes(status)) {
         throw new BadRequestError('Status is not of proper type CourseStatus enum');
@@ -36,6 +36,7 @@ router.put('/api/courses/:courseId', requireAuth, [body('title').not().isEmpty()
     course.languageTopic = languageTopic;
     course.instructionLanguage = instructionLanguage;
     course.status = status;
+    course.headerImage = headerImage;
 
     await course.save();
 

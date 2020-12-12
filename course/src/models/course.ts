@@ -6,9 +6,11 @@ interface CourseDoc extends mongoose.Document {
     title: string;
     instructor: string;
     description: string;
+    price: number;
     languageTopic: string;
     instructionLanguage: string;
     status: string;
+    headerImage: string;
 }
 
 interface CourseModel extends mongoose.Model<CourseDoc> {
@@ -19,9 +21,11 @@ interface CourseAttributes {
     title: string;
     instructor: string;
     description: string;
+    price: number;
     languageTopic: string;
     instructionLanguage: string;
     status: string;
+    headerImage: string;
 }
 
 const courseSchema = new mongoose.Schema({
@@ -36,6 +40,10 @@ const courseSchema = new mongoose.Schema({
     description:{
         type: String,
         required: true,
+    },
+    price:{
+        type: Number,
+        required: true
     },
     languageTopic: {
         type: String,
@@ -52,6 +60,10 @@ const courseSchema = new mongoose.Schema({
         required: true,
         enum: Object.values(CourseStatus),
         default: CourseStatus.Closed
+    },
+    headerImage :{
+        type: String,
+        required: false,
     }
 }, {
     toJSON:{
