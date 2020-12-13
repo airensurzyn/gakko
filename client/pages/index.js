@@ -1,7 +1,8 @@
 import buildClient from '../api/build-client';
+import Banner from '../components/landing/banner';
 
 const LandingPage = ({ currentUser }) => {
-	return 'Home page';
+	return <Banner />;
 };
 
 /*LandingPage.getInitialProps = async (context) => {

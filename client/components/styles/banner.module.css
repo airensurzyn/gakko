@@ -1,0 +1,51 @@
+.root {
+	height: '100%';
+	background-color: #ffffff;
+	z-index: 1;
+	margin: 0;
+	padding: 0;
+}
+.leftSide {
+	height: '100%';
+	background-color: #a8d0e6;
+	z-index: 2;
+	color: #ffffff;
+	display: flex;
+	align-items: center;
+}
+
+.titleContainer {
+	margin-left: 3rem;
+}
+.bannerTitle {
+	font-family: 'Avenir';
+	font-weight: 900;
+	font-size: 4rem;
+}
+.bannerSubTitle {
+	font-family: 'Avenir';
+	font-weight: 400;
+	font-size: 2rem;
+}
+
+.getStartedButton {
+	background-color: #f76c6c;
+	border: 1px solid #f76c6c;
+	margin-left: 1rem;
+}
+
+.getStartedButton:hover {
+	background-color: #f76c6c;
+	border: 1px solid #f76c6c;
+}
+
+.rightSide {
+	height: 92vh;
+	background-color: #ffffff;
+	z-index: 2;
+}
+
+.container {
+	max-width: '100%';
+	width: '100%';
+}

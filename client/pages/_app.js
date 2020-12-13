@@ -5,13 +5,13 @@ import Header from '../components/header';
 const AppComponent = ({ Component, pageProps, currentUser }) => {
 	return (
 		<div>
-			<Header currentUser={currentUser} />
-			<Component {...pageProps} />
+			<Header /*currentUser={currentUser}*/ />
+			<Component /*{...pageProps}*/ />
 		</div>
 	);
 };
 
-AppComponent.getInitialProps = async (appContext) => {
+/*AppComponent.getInitialProps = async (appContext) => {
 	const client = buildClient(appContext.ctx);
 	const response = await client.get('/api/users/current');
 	const data = response.data;
@@ -23,6 +23,6 @@ AppComponent.getInitialProps = async (appContext) => {
 		pageProps,
 		...data,
 	};
-};
+};*/
 
 export default AppComponent;
