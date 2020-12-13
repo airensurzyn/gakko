@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { Languages, CourseStatus } from '@llp-common/backend-common';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
 
 interface CourseDoc extends mongoose.Document {
@@ -11,6 +12,7 @@ interface CourseDoc extends mongoose.Document {
     instructionLanguage: string;
     status: string;
     headerImage: string;
+    version: number;
 }
 
 interface CourseModel extends mongoose.Model<CourseDoc> {
@@ -73,6 +75,9 @@ const courseSchema = new mongoose.Schema({
         }
     }
 });
+
+courseSchema.set('versionKey', 'version');
+courseSchema.plugin(updateIfCurrentPlugin);
 
 courseSchema.statics.build = (attrs: CourseAttributes) => {
     return new Course(attrs);

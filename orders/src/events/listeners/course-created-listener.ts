@@ -10,10 +10,10 @@ export class CourseCreatedListener extends Listener<CourseCreatedEvent> {
 
     async onMessage(data: CourseCreatedEvent['data'], msg: Message) {
         const { title, price, id } = data;
-        const ticket = Course.build({
+        const course = Course.build({
             title, price, id
         });
-        await ticket.save();
+        await course.save();
 
         msg.ack();
     }
