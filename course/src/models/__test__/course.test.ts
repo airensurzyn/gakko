@@ -1,7 +1,7 @@
 import { Course } from '../course';
 import { CourseStatus } from '@llp-common/backend-common';
 
-it('implements occ', async () => {
+it('implements occ', async (done) => {
 
     const course = Course.build({
         title: "Test Course",
@@ -23,6 +23,11 @@ it('implements occ', async () => {
     secondFetchedCourse!.set({ title: 'Updated second fetched course'});
 
     await firstFetchedCourse!.save();
+    try{
+        await secondFetchedCourse!.save();
+    } catch(err) {
+        return done();
+    }
 
-    await secondFetchedCourse!.save();
+    throw new Error('Should not get here');
 });
