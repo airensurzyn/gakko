@@ -30,7 +30,6 @@ export default ({ currentUser }) => {
 			className="navbar"
 			style={{
 				backgroundColor: '#ffffff',
-				borderBottom: `1px solid ${colors.lightBlue}`,
 			}}
 		>
 			<Link href="/">

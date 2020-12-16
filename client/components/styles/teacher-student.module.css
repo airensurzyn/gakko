@@ -1,0 +1,48 @@
+.root {
+	height: '100%';
+	background-color: #ffffff;
+	z-index: 1;
+	margin: 0;
+	padding: 0;
+}
+
+.leftSide {
+	height: '100%';
+	background-color: #ffffff;
+	z-index: 2;
+	color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-right: 2px dashed #f76c6c;
+}
+
+.rightSide {
+	height: 92vh;
+	background-color: #ffffff;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+}
+
+.columnRow {
+	width: 100%;
+	align-items: center;
+	height: 250px;
+}
+
+.titleDiv {
+	color: #f76c6c;
+	display: flex;
+	justify-content: center;
+	font-size: 3rem;
+	font-weight: 900;
+	margin-top: 3rem;
+	margin-bottom: 3rem;
+}
+.internalColumn {
+	width: '100%';
+	display: flex;
+	justify-content: center;
+	font-size: 2rem;
+}

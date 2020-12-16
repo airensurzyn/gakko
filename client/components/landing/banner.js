@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/banner.module.css';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
@@ -6,8 +7,29 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { BookPerson } from '../../assets/book-person';
+import { fadeIn } from 'react-animations';
+import styled, { keyframes } from 'styled-components';
 
+const FadeIn = styled.div`
+	animation: 4s ${keyframes`${fadeIn}`} infinite;
+`;
 export default () => {
+	const [word, setWord] = useState('Learn');
+
+	const wordLibrary = ['Learn', 'Teach', 'Collaborate'];
+	let count = 0;
+
+	useEffect(() => {
+		setInterval(() => {
+			setWord(wordLibrary[count]);
+			if (count === wordLibrary.length - 1) {
+				count = 0;
+			} else {
+				count += 1;
+			}
+		}, 4000);
+	}, []);
+
 	return (
 		<Container className={styles.root} fluid>
 			<Row>
@@ -37,9 +59,41 @@ export default () => {
 				</Col>
 				<Col
 					className={styles.rightSide}
-					style={{ display: 'flex', justifyContent: 'center' }}
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}
 				>
-					<BookPerson />
+					<div>
+						<Row style={{ marginBottom: '32px' }}>
+							<BookPerson style={{ margin: 'auto' }} />
+						</Row>
+						<Row
+							style={{
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+						>
+							<div style={{ display: 'flex' }}>
+								<span className={styles.subtitle}>{`I'm here to `}</span>
+								<div
+									style={{
+										display: 'flex',
+										borderBottom: '2px solid #444444',
+										paddingLeft: '8px',
+										paddingRight: '8px',
+										width: '200px',
+										justifyContent: 'center',
+									}}
+								>
+									<FadeIn>
+										<span className={styles.rotatingSubtitle}>{word}</span>
+									</FadeIn>
+								</div>
+							</div>
+						</Row>
+					</div>
 				</Col>
 			</Row>
 		</Container>
