@@ -1,5 +1,4 @@
 import buildClient from '../api/build-client';
-import Banner from '../components/landing/banner';
 import Landing from '../components/landing/landing';
 
 const LandingPage = ({ currentUser }) => {
