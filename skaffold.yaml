@@ -16,7 +16,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: airensurzyn/llp-course
+    - image: airensurzyn/llp-courses
       context: course
       docker:
         dockerfile: Dockerfile

@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: course-mongo-depl
+  name: courses-mongo-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: course-mongo
+      app: courses-mongo
   template:
     metadata:
       labels:
-        app: course-mongo
+        app: courses-mongo
     spec:
       containers:
-        - name: course-mongo
+        - name: courses-mongo
           image: mongo
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: course-mongo-srv
+  name: courses-mongo-srv
 spec:
   selector:
-    app: course-mongo
+    app: courses-mongo
   ports:
     - name: db
       protocol: TCP

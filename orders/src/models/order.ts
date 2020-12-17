@@ -1,21 +1,19 @@
 import mongoose from 'mongoose';
 import { OrderStatus } from '@llp-common/backend-common';
 import { CourseDoc } from './course';
-//import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
 export { OrderStatus };
 
 interface OrderAttrs {
     userId: string;
     status: string;
-    expiresAt: Date;
     course: CourseDoc; 
 }
 
 interface OrderDoc extends mongoose.Document {
     userId: string;
     status: string;
-    expiresAt: Date;
     course: CourseDoc;
     version: number;
 }
@@ -35,9 +33,6 @@ const orderSchema = new mongoose.Schema({
         enum: Object.values(OrderStatus),
         default: OrderStatus.Created
     },
-    expiresAt: {
-        type: mongoose.Schema.Types.Date
-    },
     course:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course'
@@ -51,8 +46,8 @@ const orderSchema = new mongoose.Schema({
     }
 });
 
-//orderSchema.set('versionKey', 'version');
-//orderSchema.plugin(updateIfCurrentPlugin);
+orderSchema.set('versionKey', 'version');
+orderSchema.plugin(updateIfCurrentPlugin);
 
 orderSchema.statics.build = (attrs: OrderAttrs) => {
     return new Order(attrs);

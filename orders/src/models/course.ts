@@ -1,21 +1,23 @@
 import mongoose from 'mongoose';
-import { Languages, CourseStatus } from '@llp-common/backend-common';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
 
 export interface CourseDoc extends mongoose.Document {
     title: string;
     price: number;
-    id: string
+    id: string;
+    version: number;
 }
 
 interface CourseModel extends mongoose.Model<CourseDoc> {
     build(attrs: CourseAttributes): CourseDoc;
+    findByEvent(event: { id: string, version: number}): Promise<CourseDoc | null>;
 }
 
 interface CourseAttributes {
     title: string;
     price: number;
-    id: string
+    id: string;
 }
 
 const courseSchema = new mongoose.Schema({
@@ -35,6 +37,16 @@ const courseSchema = new mongoose.Schema({
         }
     }
 });
+
+courseSchema.set('versionKey', 'version');
+courseSchema.plugin(updateIfCurrentPlugin);
+
+courseSchema.statics.findByEvent = (event: { id: string, version: number }) => {
+    return Course.findOne({
+        _id: event?.id,
+        version: event.version - 1
+    });
+}
 
 courseSchema.statics.build = (attrs: CourseAttributes) => {
     return new Course({

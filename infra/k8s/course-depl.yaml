@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: course-depl
+  name: courses-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: course
+      app: courses
   template:
     metadata:
       labels:
-        app: course
+        app: courses
     spec:
       containers:
-        - name: course
-          image: airensurzyn/llp-course
+        - name: courses
+          image: airensurzyn/llp-courses
           env:
             - name: JWT_KEY
               valueFrom:
@@ -22,7 +22,7 @@ spec:
                   name: jwt-secret
                   key: JWT_KEY
             - name: MONGO_URI
-              value: 'mongodb://auth-mongo-srv:27017/courses'
+              value: 'mongodb://courses-mongo-srv:27017/courses'
             - name: NATS_URL
               value: 'http://nats-srv:4222'
             - name: NATS_CLUSTER_ID
@@ -35,12 +35,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: course-srv
+  name: courses-srv
 spec:
   selector:
-    app: course
+    app: courses
   ports:
-    - name: course
+    - name: courses
       protocol: TCP
       port: 3000
       targetPort: 3000

@@ -16,11 +16,11 @@ spec:
               servicePort: 3000
           - path: /api/courses/?(.*)
             backend:
-              serviceName: course-srv
+              serviceName: courses-srv
               servicePort: 3000
           - path: /api/orders/?(.*)
             backend:
-              serviceName: course-srv
+              serviceName: orders-srv
               servicePort: 3000
           - path: /?(.*)
             backend:
