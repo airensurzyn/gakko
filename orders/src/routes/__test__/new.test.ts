@@ -1,5 +1,6 @@
 import request from 'supertest';
 import {app} from '../../app';
+
 import { Course } from '../../models/course';
 import { Order } from '../../models/order';
 import { natsWrapper } from '../../nats-wrapper';
