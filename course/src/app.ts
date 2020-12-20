@@ -10,6 +10,7 @@ import { deleteCourseRouter } from './routes/courses/delete';
 import { indexCourseRouter } from './routes/courses/index';
 import { updateCourseRouter } from './routes/courses/update';
 import { createCourseModuleRouter } from './routes/course-modules/new';
+import { showCourseModuleRouter } from './routes/course-modules/show';
 
 const app = express();
 app.set('trust proxy', true);
@@ -28,7 +29,9 @@ app.use(deleteCourseRouter);
 app.use(indexCourseRouter);
 app.use(updateCourseRouter);
 app.use(createCourseRouter);
+
 app.use(createCourseModuleRouter);
+app.use(showCourseModuleRouter);
 
 app.all('*', async (req, res) => {
     throw new NotFoundError();
