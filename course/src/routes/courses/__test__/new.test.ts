@@ -1,9 +1,9 @@
 import request from 'supertest';
-import { app } from '../../app';
-import { Course } from '../../models/course';
-import { natsWrapper } from '../../nats-wrapper';
+import { app } from '../../../app';
+import { Course } from '../../../models/course';
+import { natsWrapper } from '../../../nats-wrapper';
 
-it('has a route handler listening to /api/tickets for post requests', async () => {
+it('has a route handler listening to /api/courses for post requests', async () => {
     const response = await request(app)
         .post('/api/courses')
         .send({});
@@ -31,7 +31,7 @@ it('does not return a 401 if user is authenticated', async () => {
             price: 5,
             headerImage: "http://someurl.com",
         });
-    expect
+    expect(response.status).not.toEqual(401);
 });
 
 it('returns an error if an invalid price is provided', async () => {

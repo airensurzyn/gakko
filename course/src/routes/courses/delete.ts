@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Course } from '../models/course';
+import { Course } from '../../models/course';
 import { NotFoundError, NotAuthorizedError, CourseStatus } from '@llp-common/backend-common';
 
 const router = express.Router();

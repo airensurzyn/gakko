@@ -18,6 +18,10 @@ spec:
             backend:
               serviceName: courses-srv
               servicePort: 3000
+          - path: /api/course-modules/?(.*)
+            backend:
+              serviceName: courses-srv
+              servicePort: 3000
           - path: /api/orders/?(.*)
             backend:
               serviceName: orders-srv

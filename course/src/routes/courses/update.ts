@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import { Course } from '../models/course';
+import { Course } from '../../models/course';
 import { NotFoundError, NotAuthorizedError, CourseStatus, Languages, requireAuth, validateRequest, BadRequestError } from '@llp-common/backend-common';
-import { CourseUpdatedPublisher } from '../events/publishers/course-updated-publisher';
-import { natsWrapper } from '../nats-wrapper';
+import { CourseUpdatedPublisher } from '../../events/publishers/course-updated-publisher';
+import { natsWrapper } from '../../nats-wrapper';
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { requireAuth } from '@llp-common/backend-common';
-import { Course } from '../models/course';
+import { Course } from '../../models/course';
 
 const router = express.Router();
 
