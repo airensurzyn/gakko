@@ -40,13 +40,14 @@ afterAll(async () => {
 global.signup = async () => {
     const email = "test@test.com";
     const password = 'password';
+    const userType = 'student';
 
     const response = await request(app)
         .post('/api/users/signup')
         .send({
-            email, password
+            email, password, userType
         })
-        .expect(200);
+        .expect(201);
 
     const cookie = response.get('Set-Cookie');
     return cookie;

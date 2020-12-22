@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 import { Password } from '../services/password';
+import { UserTypes } from '@llp-common/backend-common';
 
 interface UserDoc extends mongoose.Document {
     email: string;
     password: string;
+    userType: string;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -13,6 +15,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
 interface UserAttributes {
     email: string;
     password: string;
+    userType: string;
 }
 
 const userSchema = new mongoose.Schema({
@@ -23,6 +26,12 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    userType: {
+        type: String,
+        required: true,
+        enum: Object.values(UserTypes),
+        default: UserTypes.Student
     }
 }, {
     toJSON: {

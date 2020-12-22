@@ -48,9 +48,11 @@ const SigninModal = ({ setPageState, pageState }) => {
 						/>
 					</div>
 					{errors}
-					<button className={`btn btn-primary ${styles.signupButton}`}>
-						Sign In
-					</button>
+					<div className="d-flex justify-content-end">
+						<button className={`btn btn-primary ${styles.signupButton}`}>
+							Sign In
+						</button>
+					</div>
 				</form>
 			</Modal.Body>
 		</Modal>

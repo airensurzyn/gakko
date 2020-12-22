@@ -2,29 +2,15 @@ import Link from 'next/link';
 import styles from './styles/header.module.css';
 import colors from '../styles/colors';
 import Button from 'react-bootstrap/Button';
+import useRequest from '../hooks/use-request';
 
 export default ({ currentUser, setPageState }) => {
-	// NOTE, cool way to filter options
-	/*const links = [
-		!currentUser && { label: 'Sign up', href: '/signup' },
-		!currentUser && { label: 'Sign in', href: '/signin' },
-		currentUser && { label: 'Sign out', href: '/signout' },
-	]
-		.filter((linkConfig) => linkConfig)
-		.map(({ label, href }) => {
-			return (
-				<li key={href}>
-					<Link href={href}>
-						<a
-							className="nav-link"
-							style={{ color: `${colors.lightRed}`, fontWeight: 'bold' }}
-						>
-							<Button>{label}</Button>
-						</a>
-					</Link>
-				</li>
-			);
-		});*/
+	const { signoutRequest } = useRequest({
+		url: '/api/users/signout',
+		method: 'post',
+		body: {},
+		onSuccess: () => Router.push('/'),
+	});
 
 	const setPageSignup = () => {
 		setPageState('signup');
@@ -33,6 +19,32 @@ export default ({ currentUser, setPageState }) => {
 	const setPageSignIn = () => {
 		setPageState('signin');
 	};
+
+	// NOTE, cool way to filter options
+	const links = [
+		!currentUser && {
+			label: 'Sign up',
+			onClickFunction: setPageSignup,
+		},
+		!currentUser && {
+			label: 'Sign in',
+			onClickFunction: setPageSignIn,
+		},
+		currentUser && {
+			label: 'Sign out',
+			onClickFunction: signoutRequest,
+		},
+	]
+		.filter((linkConfig) => linkConfig)
+		.map(({ label, onClickFunction }) => {
+			return (
+				<li key={label}>
+					<Button className={styles.actionButton} onClick={onClickFunction}>
+						{label}
+					</Button>
+				</li>
+			);
+		});
 
 	return (
 		<nav
@@ -54,18 +66,7 @@ export default ({ currentUser, setPageState }) => {
 				</a>
 			</Link>
 			<div className="d-flex justify-content-end">
-				<ul className="nav d-flex align-items-center">
-					<li key="Sign-up">
-						<Button onClick={setPageSignup} className={styles.actionButton}>
-							Signup
-						</Button>
-					</li>
-					<li key="Sign-in">
-						<Button onClick={setPageSignIn} className={styles.actionButton}>
-							Sign In
-						</Button>
-					</li>
-				</ul>
+				<ul className="nav d-flex align-items-center">{links}</ul>
 			</div>
 		</nav>
 	);
