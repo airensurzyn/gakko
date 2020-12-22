@@ -1,37 +1,35 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Router from 'next/router';
 import useRequest from '../../hooks/use-request';
 import Modal from 'react-bootstrap/Modal';
+import styles from '../styles/signup-modal.module.css';
 
-export default () => {
+const SigninModal = ({ setPageState, pageState }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [pageState, setPageState] = useState('view');
 	const { doRequest, errors } = useRequest({
-		url: '/api/users/signup',
+		url: '/api/users/signin',
 		method: 'post',
 		body: {
 			email,
 			password,
 		},
-		onSuccess: () => Router.push('/'),
+		onSuccess: () => Router.push('/profile'),
 	});
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-
-		let response = await doRequest();
-		console.log(response);
+		await doRequest();
 	};
 
 	const handleClose = () => {
-		setPageState('close');
+		setPageState('view');
 	};
 
 	return (
-		<Modal show={pageState === 'view'} onHide={handleClose}>
+		<Modal show={pageState === 'signin'} onHide={handleClose} centered>
 			<Modal.Header closeButton>
-				<Modal.Title>Sign Up</Modal.Title>
+				<Modal.Title>Sign In</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 				<form onSubmit={onSubmit}>
@@ -50,9 +48,13 @@ export default () => {
 						/>
 					</div>
 					{errors}
-					<button className={`btn btn-primary `}>Sign up</button>
+					<button className={`btn btn-primary ${styles.signupButton}`}>
+						Sign In
+					</button>
 				</form>
 			</Modal.Body>
 		</Modal>
 	);
 };
+
+export default SigninModal;

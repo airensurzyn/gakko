@@ -1,12 +1,19 @@
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import buildClient from '../api/build-client';
 import Header from '../components/header';
 
 const AppComponent = ({ Component, pageProps, currentUser }) => {
+	const [pageState, setPageState] = useState('view');
+	console.log(pageState);
 	return (
 		<div>
-			<Header currentUser={currentUser} />
-			<Component /*{...pageProps}*/ />
+			<Header currentUser={currentUser} setPageState={setPageState} />
+			<Component
+				{...pageProps}
+				pageState={pageState}
+				setPageState={setPageState}
+			/>
 		</div>
 	);
 };

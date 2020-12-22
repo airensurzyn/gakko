@@ -12,12 +12,11 @@ export default () => {
 			email,
 			password,
 		},
-		onSuccess: () => Router.push('/'),
+		onSuccess: () => Router.push('/profile'),
 	});
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-
 		await doRequest();
 	};
 

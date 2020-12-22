@@ -3,9 +3,9 @@ import styles from './styles/header.module.css';
 import colors from '../styles/colors';
 import Button from 'react-bootstrap/Button';
 
-export default ({ currentUser }) => {
+export default ({ currentUser, setPageState }) => {
 	// NOTE, cool way to filter options
-	const links = [
+	/*const links = [
 		!currentUser && { label: 'Sign up', href: '/signup' },
 		!currentUser && { label: 'Sign in', href: '/signin' },
 		currentUser && { label: 'Sign out', href: '/signout' },
@@ -19,12 +19,21 @@ export default ({ currentUser }) => {
 							className="nav-link"
 							style={{ color: `${colors.lightRed}`, fontWeight: 'bold' }}
 						>
-							<Button className={styles.actionButton}>{label}</Button>
+							<Button>{label}</Button>
 						</a>
 					</Link>
 				</li>
 			);
-		});
+		});*/
+
+	const setPageSignup = () => {
+		setPageState('signup');
+	};
+
+	const setPageSignIn = () => {
+		setPageState('signin');
+	};
+
 	return (
 		<nav
 			className="navbar"
@@ -45,7 +54,18 @@ export default ({ currentUser }) => {
 				</a>
 			</Link>
 			<div className="d-flex justify-content-end">
-				<ul className="nav d-flex align-items-center">{links}</ul>
+				<ul className="nav d-flex align-items-center">
+					<li key="Sign-up">
+						<Button onClick={setPageSignup} className={styles.actionButton}>
+							Signup
+						</Button>
+					</li>
+					<li key="Sign-in">
+						<Button onClick={setPageSignIn} className={styles.actionButton}>
+							Sign In
+						</Button>
+					</li>
+				</ul>
 			</div>
 		</nav>
 	);
