@@ -44,7 +44,7 @@ lessonSchema.set('versionKey', 'version');
 lessonSchema.plugin(updateIfCurrentPlugin);
 
 lessonSchema.statics.build = (attrs: LessonAttributes) => {
-    return new lessonSchema(attrs);
+    return new Lesson(attrs);
 }
 
 const Lesson = mongoose.model<LessonDoc, LessonModel>('Lesson', lessonSchema);

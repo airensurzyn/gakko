@@ -37,7 +37,7 @@ it('does not return a 401 if user is authenticated', async () => {
 
 it('returns an error if no title is provided', async () => {
     const courseId = mongoose.Types.ObjectId();
-    const response = await request(app)
+    await request(app)
         .post('/api/courses')
         .set('Cookie', global.signup())
         .send({

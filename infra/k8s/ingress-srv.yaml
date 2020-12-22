@@ -14,6 +14,10 @@ spec:
             backend:
               serviceName: auth-srv
               servicePort: 3000
+          - path: /api/lessons/?(.*)
+            backend:
+              serviceName: courses-srv
+              servicePort: 3000
           - path: /api/courses/?(.*)
             backend:
               serviceName: courses-srv
