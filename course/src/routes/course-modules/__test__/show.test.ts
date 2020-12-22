@@ -1,7 +1,5 @@
 import request from 'supertest';
 import { app } from '../../../app';
-import { Course } from '../../../models/course';
-import { CourseModule } from '../../../models/course-module';
 import mongoose from 'mongoose';
 
 it('gets the specified course module from the courseModuleId', async () => {
@@ -57,7 +55,7 @@ it('returns a 404 for incorrect courseModuleId', async () => {
             headerImage: "http://someurl.com",
         }).expect(201);
 
-    const { body: courseModule } = await request(app)
+    await request(app)
         .post('/api/course-modules')
         .set('Cookie', global.signup())
         .send({
