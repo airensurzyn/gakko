@@ -5,7 +5,6 @@ import Header from '../components/header';
 
 const AppComponent = ({ Component, pageProps, currentUser }) => {
 	const [pageState, setPageState] = useState('view');
-	console.log(pageState);
 	return (
 		<div>
 			<Header currentUser={currentUser} setPageState={setPageState} />

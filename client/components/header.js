@@ -3,9 +3,10 @@ import styles from './styles/header.module.css';
 import colors from '../styles/colors';
 import Button from 'react-bootstrap/Button';
 import useRequest from '../hooks/use-request';
+import Router from 'next/router';
 
 export default ({ currentUser, setPageState }) => {
-	const { signoutRequest } = useRequest({
+	const { doRequest } = useRequest({
 		url: '/api/users/signout',
 		method: 'post',
 		body: {},
@@ -20,7 +21,6 @@ export default ({ currentUser, setPageState }) => {
 		setPageState('signin');
 	};
 
-	// NOTE, cool way to filter options
 	const links = [
 		!currentUser && {
 			label: 'Sign up',
@@ -32,7 +32,7 @@ export default ({ currentUser, setPageState }) => {
 		},
 		currentUser && {
 			label: 'Sign out',
-			onClickFunction: signoutRequest,
+			onClickFunction: doRequest,
 		},
 	]
 		.filter((linkConfig) => linkConfig)

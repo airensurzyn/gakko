@@ -13,7 +13,7 @@ import styled, { keyframes } from 'styled-components';
 const FadeIn = styled.div`
 	animation: 4s ${keyframes`${fadeIn}`} infinite;
 `;
-export default () => {
+const Banner = () => {
 	const [word, setWord] = useState('Learn');
 
 	const wordLibrary = ['Learn', 'Teach', 'Collaborate'];
@@ -99,3 +99,5 @@ export default () => {
 		</Container>
 	);
 };
+
+export default Banner;
