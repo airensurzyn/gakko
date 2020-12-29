@@ -26,7 +26,8 @@ router.post('/api/users/signin',[
         
         const userJwt = jwt.sign({
             id: existingUser.id,
-            email: existingUser.email
+            email: existingUser.email,
+            usertype: existingUser.userType
         }, process.env.JWT_KEY!);
 
         

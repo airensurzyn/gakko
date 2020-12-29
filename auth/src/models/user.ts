@@ -30,8 +30,7 @@ const userSchema = new mongoose.Schema({
     userType: {
         type: String,
         required: true,
-        enum: Object.values(UserTypes),
-        default: UserTypes.Student
+        enum: Object.values(UserTypes)
     }
 }, {
     toJSON: {

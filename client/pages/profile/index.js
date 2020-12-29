@@ -15,6 +15,8 @@ const Profile = ({ pageState, setPageState, currentUser }) => {
 		method: 'get',
 	});
 
+	console.log(currentUser);
+
 	useEffect(() => {
 		const getCourseList = async () => {
 			let res = await doRequest();

@@ -59,9 +59,13 @@ const SignupModal = ({ setPageState, pageState }) => {
 					<div className="form-group">
 						<label>I am a ...</label>
 						<br />
-						<Form.Control as="select" defaultValue="Student">
-							<option>Student</option>
-							<option>Instructor</option>
+						<Form.Control
+							as="select"
+							defaultValue="student"
+							onChange={(e) => setUserType(e.target.value)}
+						>
+							<option value={'student'}>Student</option>
+							<option value={'instructor'}>Instructor</option>
 						</Form.Control>
 					</div>
 					{errors}
