@@ -13,6 +13,7 @@ import { createCourseModuleRouter } from './routes/course-modules/new';
 import { showCourseModuleRouter } from './routes/course-modules/show';
 import { createLessonRouter } from './routes/lessons/new';
 import { showLessonRouter } from './routes/lessons/show';
+import { showInstructorCourseRouter } from './routes/courses/show-instructor';
 
 
 const app = express();
@@ -32,6 +33,7 @@ app.use(deleteCourseRouter);
 app.use(indexCourseRouter);
 app.use(updateCourseRouter);
 app.use(createCourseRouter);
+app.use(showInstructorCourseRouter);
 
 app.use(createCourseModuleRouter);
 app.use(showCourseModuleRouter);

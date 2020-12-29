@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles/index.module.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -7,8 +7,26 @@ import CourseCard from '../../components/course-ui/course-card';
 import CreateCourse from './course/create';
 import useRequest from '../../hooks/use-request';
 
-const Profile = ({ pageState, setPageState }) => {
-	const courseList = [
+const Profile = ({ pageState, setPageState, currentUser }) => {
+	const [courseList, setCourseList] = useState([]);
+	const [recentlyFetched, setRecentlyFetched] = useState(false);
+	const { doRequest, errors } = useRequest({
+		url: '/api/courses/instructor/' + currentUser.id,
+		method: 'get',
+	});
+
+	useEffect(() => {
+		const getCourseList = async () => {
+			let res = await doRequest();
+			setCourseList(res);
+		};
+		if (!recentlyFetched) {
+			getCourseList();
+			setRecentlyFetched(false);
+		}
+	}, [recentlyFetched]);
+
+	/*const courseList = [
 		{
 			title: 'Javascript 101',
 			content: 'Some content text here',
@@ -20,7 +38,7 @@ const Profile = ({ pageState, setPageState }) => {
 			content: 'Some content text here',
 			imageSource: 'https://reactjs.org/logo-og.png',
 		},
-	];
+	];*/
 
 	const createCourseMode = () => {
 		pageState === 'view' ? setPageState('createCourse') : setPageState('view');
@@ -45,7 +63,7 @@ const Profile = ({ pageState, setPageState }) => {
 					{courseList.map((course) => (
 						<CourseCard
 							title={course.title}
-							content={course.content}
+							content={course.description}
 							imageSource={course.imageSource}
 						/>
 					))}

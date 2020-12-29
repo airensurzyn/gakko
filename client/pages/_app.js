@@ -11,6 +11,7 @@ const AppComponent = ({ Component, pageProps, currentUser }) => {
 			<Component
 				{...pageProps}
 				pageState={pageState}
+				currentUser={currentUser}
 				setPageState={setPageState}
 			/>
 		</div>
