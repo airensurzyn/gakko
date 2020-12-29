@@ -13,7 +13,6 @@ router.post('/api/courses', requireAuth, [body('title').not().isEmpty().withMess
     body('instructionLanguage').not().isEmpty().withMessage('Instruction Language is required'),
     body('price').isFloat({ gt: 0 }).withMessage('Price must be greater than 0')],
     validateRequest, async (req: Request, res: Response) => {
-        
         const { title, description, languageTopic, instructionLanguage, headerImage, price } = req.body;
 
         if(!Object.values(Languages).includes(languageTopic)) {

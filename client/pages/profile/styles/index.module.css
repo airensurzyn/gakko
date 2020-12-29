@@ -1,5 +1,9 @@
 .root {
 	width: '70%';
-	font-weight: bold;
-	font-size: 32px;
+	margin-top: 2rem;
+}
+
+.subHeader {
+	font-weight: normal;
+	font-size: 24px;
 }
