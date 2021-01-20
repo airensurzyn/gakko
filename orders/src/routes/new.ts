@@ -9,6 +9,8 @@ import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
+const EXPIRATION_WINDOW_SECONDS = 1 * 60;
+
 router.post('/api/orders', requireAuth, 
         [body('courseId').not()
         .isEmpty()
@@ -21,10 +23,15 @@ router.post('/api/orders', requireAuth,
     if(!course) {
         throw new NotFoundError();
     } 
+
+    const expiration = new Date();
+    expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
+
     const order = Order.build({
         course,
         status: OrderStatus.Created,
-        userId: req.currentUser!.id
+        userId: req.currentUser!.id,
+        expiresAt: expiration,
     });
 
     await order.save();
@@ -39,7 +46,8 @@ router.post('/api/orders', requireAuth,
         status : order.status,
         userId: order.userId,
         version: order.version,
-        id: order._id
+        id: order._id,
+        expiresAt: order.expiresAt.toISOString()
     })
 
     res.status(201).send(order);

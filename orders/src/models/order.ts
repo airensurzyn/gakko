@@ -8,7 +8,8 @@ export { OrderStatus };
 interface OrderAttrs {
     userId: string;
     status: string;
-    course: CourseDoc; 
+    course: CourseDoc;
+    expiresAt: Date;
 }
 
 interface OrderDoc extends mongoose.Document {
@@ -16,6 +17,7 @@ interface OrderDoc extends mongoose.Document {
     status: string;
     course: CourseDoc;
     version: number;
+    expiresAt: Date;
 }
 
 interface OrderModel extends mongoose.Model<OrderDoc> {
@@ -32,6 +34,9 @@ const orderSchema = new mongoose.Schema({
         required: true,
         enum: Object.values(OrderStatus),
         default: OrderStatus.Created
+    },
+    expiresAt: {
+        type: mongoose.Schema.Types.Date
     },
     course:{
         type: mongoose.Schema.Types.ObjectId,
