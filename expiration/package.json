@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@llp-common/backend-common": "^1.0.30",
+    "@llp-common/backend-common": "^1.0.31",
     "@types/bull": "^3.15.0",
     "bull": "^3.20.0",
     "node-nats-streaming": "^0.3.2",
